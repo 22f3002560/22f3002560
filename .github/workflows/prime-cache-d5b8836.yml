@@ -34,12 +34,7 @@ jobs:
       
      
       - name: prime-cache-d5b8836
-        run: |
-          if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
-            echo "Cache hit: true"
-          else
-            echo "Cache hit: false"
-          fi
+        run: echo "Cache hit result - ${{ steps.cache.outputs.cache-hit }}"
       
       - name: Setup dependencies
         if: steps.cache.outputs.cache-hit != 'true'
