@@ -1,4 +1,10 @@
-name: prime-cache-d5b8836
+- name: prime-cache-d5b8836
+  run: |
+          if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache hit: true"
+          else
+            echo "Cache hit: false"
+          fi
 
 on:
   push:
