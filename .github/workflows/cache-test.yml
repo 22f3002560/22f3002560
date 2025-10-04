@@ -19,5 +19,5 @@ jobs:
           path: ~/.cache/pip
           key: cache-d5b8836
 
-      - name: prime-cache-d5b8836
+      - name: Show cache result
         run: echo "Cache result:${{ steps.cache.outputs.cache-hit }}"
