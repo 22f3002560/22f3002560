@@ -35,22 +35,14 @@ jobs:
           restore-keys: |
             cache-d5b8836-${{ runner.os }}-
       
-      # Prime cache step (Requirement 2)
+     
       - name: prime-cache-d5b8836
         run: |
-          echo "========================================="
-          echo "Cache Prime Check - cache-d5b8836"
-          echo "========================================="
           if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
-            echo "Status: CACHE HIT ✓"
-            echo "Cache was successfully restored"
-            echo "Cache Key: cache-d5b8836"
+            echo "Cache hit: true"
           else
-            echo "Status: CACHE MISS ✗"
-            echo "Building new cache"
-            echo "Cache Key: cache-d5b8836"
+            echo "Cache hit: false"
           fi
-          echo "========================================="
       
       - name: Setup dependencies
         if: steps.cache.outputs.cache-hit != 'true'
