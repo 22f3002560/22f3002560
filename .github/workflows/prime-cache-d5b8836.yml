@@ -1,10 +1,4 @@
-- name: prime-cache-d5b8836
-  run: |
-          if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
-            echo "Cache hit: true"
-          else
-            echo "Cache hit: false"
-          fi
+name: Complete Deployment Workflow
 
 on:
   push:
@@ -21,7 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      # Email identifier step (Requirement 1)
       - name: 22f3002560@ds.study.iitm.ac.in
         run: |
           echo "Student ID: 22f3002560@ds.study.iitm.ac.in"
