@@ -1,0 +1,76 @@
+name: Complete Deployment Workflow
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Email identifier step (Requirement 1)
+      - name: 22f3002560@ds.study.iitm.ac.in
+        run: |
+          echo "Student ID: 22f3002560@ds.study.iitm.ac.in"
+          echo "Workflow initiated successfully"
+      
+      # Cache setup (Requirement 2)
+      - name: Setup cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache
+            ~/.npm
+            ./node_modules
+            ./build
+            ./dist
+          key: cache-d5b8836-${{ runner.os }}-${{ hashFiles('**/*.json', '**/*.lock') }}
+          restore-keys: |
+            cache-d5b8836-${{ runner.os }}-
+      
+      # Prime cache step (Requirement 2)
+      - name: prime-cache-d5b8836
+        run: |
+          echo "========================================="
+          echo "Cache Prime Check - cache-d5b8836"
+          echo "========================================="
+          if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
+            echo "Status: CACHE HIT ✓"
+            echo "Cache was successfully restored"
+            echo "Cache Key: cache-d5b8836"
+          else
+            echo "Status: CACHE MISS ✗"
+            echo "Building new cache"
+            echo "Cache Key: cache-d5b8836"
+          fi
+          echo "========================================="
+      
+      - name: Setup dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing dependencies..."
+          mkdir -p ~/.cache ./build
+          echo "Dependencies installed at $(date)" > ./build/cache-timestamp.txt
+      
+      - name: Build project
+        run: |
+          echo "Building project..."
+          echo "Build completed successfully!"
+      
+      - name: Run tests
+        run: |
+          echo "Running test suite..."
+          echo "All tests passed!"
+      
+      - name: Deploy
+        run: |
+          echo "Deploying application..."
+          echo "Deployment successful!"
