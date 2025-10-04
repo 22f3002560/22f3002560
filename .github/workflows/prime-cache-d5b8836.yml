@@ -28,10 +28,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
-            ./node_modules
-            ./build
-            ./dist
-          key: cache-d5b8836-${{ runner.os }}-${{ hashFiles('**/*.json', '**/*.lock') }}
+          key: cache-d5b8836-${{ runner.os }}
           restore-keys: |
             cache-d5b8836-${{ runner.os }}-
       
