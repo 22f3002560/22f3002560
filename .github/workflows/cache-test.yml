@@ -1,18 +1,23 @@
 name: Cache Test
-
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v4
         with:
-          path: ~/.cache
+          # quote paths so '~' is not treated as null by YAML
+          path: |
+            '~/.cache/pip'
+            '~/.cache'
           key: cache-d5b8836
 
       - name: prime-cache-d5b8836
