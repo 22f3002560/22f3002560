@@ -1,24 +1,23 @@
 name: Cache Test
+
 on:
   push:
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v4
         with:
-          # quote paths so '~' is not treated as null by YAML
-          path: |
-            '~/.cache/pip'
-            '~/.cache'
+          path: ~/.cache/pip
           key: cache-d5b8836
 
       - name: prime-cache-d5b8836
-        run: echo "Cache result: ${{ steps.cache.outputs.cache-hit }}"
+        run: echo "Cache result:${{ steps.cache.outputs.cache-hit }}"
